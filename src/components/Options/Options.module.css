@@ -1,0 +1,22 @@
+.container {
+  text-align: center;
+}
+.container button:not(:last-child) {
+  margin-right: 10px;
+}
+.container button {
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.positive:hover,
+.neutral:hover,
+.bad:hover,
+.reset:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
