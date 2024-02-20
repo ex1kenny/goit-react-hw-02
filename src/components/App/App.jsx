@@ -5,6 +5,15 @@ import { useState, useEffect } from "react";
 import css from "./App.module.css";
 
 export default function App() {
+  const updateFeedback = (feedbackType) => {
+    return () => {
+      setFeedback((prevFeedback) => ({
+        ...prevFeedback,
+        [feedbackType]: prevFeedback[feedbackType] + 1,
+      }));
+    };
+  };
+
   const [feedback, setFeedback] = useState(() => {
     const savedFeedback = window.localStorage.getItem("feedback");
     return savedFeedback === null
@@ -13,18 +22,6 @@ export default function App() {
   });
   const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
 
-  const handlePositeve = () => {
-    const newGood = feedback.good + 1;
-    setFeedback({ ...feedback, good: newGood });
-  };
-  const handleNeutral = () => {
-    const newNeutral = feedback.neutral + 1;
-    setFeedback({ ...feedback, neutral: newNeutral });
-  };
-  const handleBad = () => {
-    const newBad = feedback.bad + 1;
-    setFeedback({ ...feedback, bad: newBad });
-  };
   const handleReset = () => {
     setFeedback({ good: 0, neutral: 0, bad: 0 });
   };
@@ -37,9 +34,9 @@ export default function App() {
     <div className={css.container}>
       <Description />
       <Options
-        onPositiveClick={handlePositeve}
-        onNeutralClick={handleNeutral}
-        onBadClick={handleBad}
+        onPositiveClick={updateFeedback("good")}
+        onNeutralClick={updateFeedback("neutral")}
+        onBadClick={updateFeedback("bad")}
         onResetClick={handleReset}
         total={totalFeedback}
       />
