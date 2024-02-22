@@ -1,21 +1,15 @@
 import css from "./Options.module.css";
 
-const Options = ({
-  onPositiveClick,
-  onNeutralClick,
-  onBadClick,
-  onResetClick,
-  total,
-}) => {
+const Options = ({ updateFeedback, onResetClick, total }) => {
   return (
     <div className={css.container}>
-      <button className={css.positive} onClick={onPositiveClick}>
+      <button className={css.positive} onClick={() => updateFeedback("good")}>
         Good
       </button>
-      <button className={css.neutral} onClick={onNeutralClick}>
+      <button className={css.neutral} onClick={() => updateFeedback("neutral")}>
         Neutral
       </button>
-      <button className={css.bad} onClick={onBadClick}>
+      <button className={css.bad} onClick={() => updateFeedback("bad")}>
         Bad
       </button>
       {total > 0 && (
